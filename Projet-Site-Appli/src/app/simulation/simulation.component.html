@@ -1,0 +1,162 @@
+<div class="container text-center align-middle" style="height: 100px;">
+  <div class="row" class="bg-dark" style="border-radius: 0% 0% 60px 60px">
+    <div class="col">
+      <h5 class="text-light" style="text-align: center;">{{'simulation.title' | translate }}</h5>
+    </div>
+  </div>
+  <div class="row" *ngIf="this.config == 'true'">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">Question {{IdQuestion}}/{{maxscore/5}}</h5>
+          <p class="card-text" style="text-align: center;" *ngIf="langue == 'fr'">{{questions[question].label_fr}} | ID Question : {{questions[question].id_question}}</p>
+          <p class="card-text" style="text-align: center;" *ngIf="langue == 'en'">{{questions[question].label_en}} | ID Question : {{questions[question].id_question}}</p>
+          <ngb-alert *ngIf="errorMessage" type="info" (closed)="errorMessage=''">{{errorMessage | translate }}</ngb-alert>
+          <hr>
+          <ngb-alert *ngIf="errorMessage" type="danger" (closed)="errorMessage=''">{{'simulation.error' | translate }}</ngb-alert>
+          <div class="row" id="note">
+            <div class="col-2">
+              <button (click)="IncQuestion(0,questions.length)" class="btn btn-primary">0</button>
+            </div>
+            <div class="col-2">
+              <button (click)="IncQuestion(1,questions.length)" class="btn btn-primary">1</button>
+            </div>
+            <div class="col-2">
+              <button (click)="IncQuestion(2,questions.length)" class="btn btn-primary">2</button>
+            </div>
+            <div class="col-2">
+              <button (click)="IncQuestion(3,questions.length)" class="btn btn-primary">3</button>
+            </div>
+            <div class="col-2">
+              <button (click)="IncQuestion(4,questions.length)" class="btn btn-primary">4</button>
+            </div>
+            <div class="col-2">
+              <button (click)="IncQuestion(5,questions.length)" class="btn btn-primary">5</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="this.config == 'false'">
+    <div class="col">
+      <div class="card">
+        <h5 class="card-header"><i class="bi bi-gear"></i> {{'theme.title' | translate }}</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/mysql.jpg); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.database.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.database.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('Basededonnees')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/reseau.jpg); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.network.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.network.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('Reseau')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault2">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/frontend.jpg); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.frontend.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.frontend.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('Web-Front')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault3">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/backend.png); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.backend.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.backend.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('Web-Back')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault4">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/poo.jpg); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.oop.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.oop.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('ProgObjet')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault5">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/experience.jpg); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.experience.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.experience.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('Experience')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault6">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/personnel.jpg); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.personnal.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.personnal.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('Personnel')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault7">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/php.jpg); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.php.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.php.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('PHP')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault8" >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body" style="background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(assets/img/themes/softskills.webp); background-repeat: no-repeat; background-size: 100%;">
+                  <h5 class="card-title">{{'theme.softskills.title' | translate }}</h5>
+                  <p class="card-text">{{'theme.softskills.description' | translate }}</p>
+                  <div class="form-check form-switch">
+                    <input (change)="switchTheme('SoftSkills')" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault9">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<label><i class="bi bi-stopwatch"></i> {{'survival.setup.addtimer' | translate }}</label>&nbsp;
+          <input (change)="switchTimer()" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">-->
+          <hr>
+          <button class="btn btn-primary" (click)="envoyer()"><i class="bi bi-send"></i> {{'survival.play' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-overlay></app-overlay>
